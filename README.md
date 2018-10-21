@@ -4,7 +4,7 @@ Krétás API-oknak nem hivatalos gyűjteménye
 Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem
 
 ## Iskolák lekérdezése
-#### az összes iskola ahol be van vezetve az e-Kréta:  
+#### Az összes iskola ahol be van vezetve az e-Kréta:  
 ```bash
 curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0" -H "Accept: application/json"  https://kretagloalmobileapi.ekreta.hu/api/v1/Institute
 ```
@@ -12,7 +12,7 @@ curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0" -H "Accept: application/j
     * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
 * https://kretagloalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
 
-#### a szerver válasza:  
+#### A szerver válasza:  
 ```json
 [
   {
@@ -31,13 +31,13 @@ curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0" -H "Accept: application/j
 ```
 
 ## Ismeretlen lekérdezés
-#### nem tudom mit csinál:
+#### Nem tudom mit csinál:
 ```bash
 curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json
 ```
 * igazából egy mezei böngészőből is [végrehajtható](http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json)
 
-#### a szerver válasza:  
+#### A szerver válasza:  
 ```json
 {
   "GlobalMobileApiUrlDEV": "https://kretaglobalmobileapiuat.ekreta.hu",
@@ -48,7 +48,7 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 ```
 
 ## Bejelentkezés
-### lekér egy Bearer kódot amit majd azonosításra fogunk használni később
+### Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
 
 ```bash
 curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
@@ -62,7 +62,7 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" --data "institute_code=xxxxxxxxxxx&userNa
 * grant_type:  ¯\\_(ツ)_/¯
 * client_id:  ¯\\_(ツ)_/¯
 
-#### a szerver válasza:
+#### A szerver válasza:
 ```json
 {"access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
 ```
@@ -79,7 +79,7 @@ curl -H "Content-Type: application/json" --data "{
  -e https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login
  https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login/LoginCheck
 ```
-#### a szerver válasza:
+#### A szerver válasza:
 ```json
 {"ErrorCode":"Ok","ErrorMessage":"Sikeres bejelentkezés.","Success":true,"WarningMessage":""}
 ```
@@ -95,7 +95,7 @@ curl -H "Content-Type: application/json" --data "{
 curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
 ```
 
-#### a szerver válasza:
+#### A szerver válasza:
 ```json
 {
   "StudentId": 0000000,
@@ -199,7 +199,7 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXX
 ```
 
 ## Órarend lekérése
-### lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
+### Lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
 
 * a mobil alkalmazás használja
 * HOST: az intézményhez tartozó krétás weboldal címe
@@ -211,7 +211,7 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXX
 curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09
 ```
 
-#### a szerver válasza:
+#### A szerver válasza:
 ```json
 [
   {
