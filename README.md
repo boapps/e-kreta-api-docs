@@ -239,6 +239,8 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 
-TODO:
+##TODO:
 - token frissítés
 - házi feladatok lekérdezése
+- feliratkozás értesítésekre
+- faliújság
