@@ -51,11 +51,10 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 ### Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
 
 ```bash
-curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
+curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
 ```
 * a mobil alkalmazás használja
 * csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
-* HOST: az intézményhez tartozó krétás weboldal címe
 * institute_code: az intézmény azonosítója
 * userName: a felhasználó azonosítója
 * password: a felhasználó jelszava
@@ -75,7 +74,7 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" --data "institute_code=xxxxxxxxxxx&userNa
 ```bash
 curl --data "{
    \"UserName\": \"xxxxxxxxxxx\", \"Password\": \"xxxxxxxxxxx\"
- }" -H "Host: xxxxxxxxxxxxx.e-kreta.hu"
+ }"
  -e https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login
  https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login/LoginCheck
 ```
@@ -88,11 +87,10 @@ curl --data "{
 ### Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
 
 * a mobil alkalmazás használja
-* HOST: az intézményhez tartozó krétás weboldal címe
 * kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 
 ```bash
-curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
 ```
 
 #### A szerver válasza:
@@ -202,13 +200,12 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXX
 ### Lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
 
 * a mobil alkalmazás használja
-* HOST: az intézményhez tartozó krétás weboldal címe
 * kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 * fromDate: a vizsgált időintervallum kezdete (ÉÉÉÉ-HH-NN)
 * toDate: a vizsgált időintervallum vége (ÉÉÉÉ-HH-NN)
 
 ```bash
-curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09
 ```
 
 #### A szerver válasza:
