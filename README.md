@@ -6,11 +6,11 @@ Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/d
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
 ```bash
-curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0" -H "Accept: application/json"  https://kretagloalmobileapi.ekreta.hu/api/v1/Institute
+curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute
 ```
-* apiKey: egy random kulcs, amit szerintem a szerver oszt ki az alkalmazás első megnyitásakor, tudtommal nem tartalmaz személyes adatot/jelszót/felhasználónevet. Nem tudom mi értelme van. Néhány lehetséges példa:
+* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
     * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
-* https://kretagloalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
+* https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
 
 #### A szerver válasza:  
 ```json
@@ -73,7 +73,7 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" --data "institute_code=xxxxxxxxxxx&userNa
 * a böngészős kréta használja
 
 ```bash
-curl -H "Content-Type: application/json" --data "{
+curl --data "{
    \"UserName\": \"xxxxxxxxxxx\", \"Password\": \"xxxxxxxxxxx\"
  }" -H "Host: xxxxxxxxxxxxx.e-kreta.hu"
  -e https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login
