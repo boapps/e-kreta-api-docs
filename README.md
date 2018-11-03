@@ -240,3 +240,8 @@ curl -H "HOST: xxxxxxxxxxx.e-kreta.hu" -H "Authorization: Bearer XXXXXXXXXXXXXXX
   ...
 ]
 ```
+
+
+TODO:
+- token frissítés
+- házi feladatok lekérdezése
