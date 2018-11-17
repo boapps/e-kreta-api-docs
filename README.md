@@ -63,7 +63,11 @@ curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxx
 
 #### A szerver válasza:
 ```json
-{"access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
+{
+ "access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+ "refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+ ...
+ }
 ```
 
 ## Felhasználónév-jelszó páros ellenőrzése
@@ -237,10 +241,29 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   ...
 ]
 ```
+## Token frissítés
+### Lekér egy új Bearer kódot amit majd azonosításra fogunk használni később
+
+```bash
+curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
+```
+* a mobil alkalmazás használja
+* refresh_token: A refresh_token amit kaptál amikor beléptél 
+* grant_type: refresh_token
+* client_id:  ¯\\_(ツ)_/¯
+
+#### A szerver válasza:
+```json
+{
+ "access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+ "refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+ ...
+ }
+ ```
+ 
 
 
-##TODO:
-- token frissítés
+## TODO:
 - házi feladatok lekérdezése
 - feliratkozás értesítésekre
 - faliújság
