@@ -260,10 +260,33 @@ curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c
  ...
  }
  ```
- 
+
+## Tanulói házi feladat lekérése
+
+* Lekéri egy tanuló által felírt házit egy ID alapján
+* Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
+* Ha tanár töltötte fel a házit, amihez az ID tartozik, akkor a válasz üres
+
+```bash
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanuloHaziFeladatLista/HAZIFELADATID
+```
+
+* HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
+
+
+## Tanári házi feladat lekérése
+
+* Lekéri egy tanár által felírt házit egy ID alapján
+* Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
+* Ha diák töltötte fel, akkor üres
+
+```bash
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanarHaziFeladat/HAZIFELADATID
+```
+
+* HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
 
 ## TODO:
-- házi feladatok lekérdezése
 - feliratkozás értesítésekre
 - faliújság
