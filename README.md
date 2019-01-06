@@ -42,12 +42,13 @@ curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobil
 ]
 ```
 
-## Ismeretlen lekérdezés
-#### Nem tudom mit csinál:
+## API linkek lekérdezése
+#### Lekéri a KRÉTA API linkjét:
 ```bash
 curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json
 ```
 * igazából egy mezei böngészőből is [végrehajtható](http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json)
+* mire jó: ha az API linkje változna, akkor nem kell frissíteni az appot (rájött: [thegergo02](https://github.com/thegergo02))
 
 #### A szerver válasza:  
 ```json
