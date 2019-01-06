@@ -1,7 +1,9 @@
 # e-Kréta API dokumentáció
 Krétás API-oknak nem hivatalos gyűjteménye
 
-Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem
+Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem.
+
+A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
 
 ## Nem hivatalos Krétás projectek:
  * [Spongyarend](http://spongyarend.com/) Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
@@ -78,23 +80,6 @@ curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxx
  "refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
  ...
  }
-```
-
-## Felhasználónév-jelszó páros ellenőrzése
-
-* csak egy gyors ellenőrzés
-* a böngészős kréta használja
-
-```bash
-curl --data "{
-   \"UserName\": \"xxxxxxxxxxx\", \"Password\": \"xxxxxxxxxxx\"
- }"
- -e https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login
- https://xxxxxxxxxxx.e-kreta.hu/Adminisztracio/Login/LoginCheck
-```
-#### A szerver válasza:
-```json
-{"ErrorCode":"Ok","ErrorMessage":"Sikeres bejelentkezés.","Success":true,"WarningMessage":""}
 ```
 
 ## Felhasználó adatainak lekérdezése
@@ -298,5 +283,4 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 ## TODO:
-- feliratkozás értesítésekre
 - faliújság
