@@ -7,7 +7,7 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
 
 ## Nem hivatalos Krétás projectek:
  * [Spongyarend](http://spongyarend.com/) Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
- * [eFilc](https://github.com/bru02/eFilc) Webes Kréta kliens diákoknak, Toldys extrákkal
+ * [eFilc](https://github.com/bru02/eFilc) Webes Kréta kliens diákoknak, Toldys extrákkal ([weboldal](https://www.bru02.tk/e-filc/))
  * [KFGnaplo](https://github.com/hexadec/KFGnaplo) Android kliens a Krétához, ami értesítéseket küld az új jegyekről, helyettesítésekről (még csak a Karinthy Frigyes Gimnáziumhoz van)
  * [eSzivacs 2](https://github.com/boapps/e-Szivacs-2) Android kliens a Kréta rendszerhez
  * [Kréti](https://github.com/szilardhuber/kreta-bot) Bot, ami Krétás értesítéseket küld egy chatbe
