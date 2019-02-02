@@ -14,7 +14,7 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
  * [kfgApp](https://github.com/baltitenger/KFGapp) Egy app a Karinthy Gimnáziumhoz, Kréta API-t is használ
  * [CardPass](https://github.com/Xerren09/CardPass-Entry) Beléptetőkártyás rendszer, ami a Kréta rendszert használja, hogy eldöntse késett -e a tanuló
  * [eKreta@thegergo02](https://github.com/thegergo02/eKreta-thegergo02) Cinnamon asztali környezethez egy desklet, megjeleníti a jegyeidet és a Kréta API-t használja
-
+ * [gKréta](https://github.com/thegergo02/gKreta) Az [Electron](https://electronjs.org/) frameworkon alapuló kliens a KRÉTA rendszerhez.
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
 ```bash
