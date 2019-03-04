@@ -1,33 +1,41 @@
-# e-Kréta API dokumentáció
+
+e-Kréta API dokumentáció
+
 Krétás API-oknak nem hivatalos gyűjteménye
 
-Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem.
+Ezeket a lekérdezéseket egy SSL Capture nevű Androidos alkalmazással szereztem.
 
-A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
+A böngészős KRÉTA API dokumentációját itt találod . ( Xerren09 készítette)
 
-## Nem hivatalos Krétás projectek:
- * [Spongyarend](http://spongyarend.com/) Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
- * [eFilc](https://github.com/bru02/eFilc) Webes Kréta kliens diákoknak, Toldys extrákkal ([weboldal](https://www.bru02.tk/e-filc/))
- * [KFGnaplo](https://github.com/hexadec/KFGnaplo) Android kliens a Krétához, ami értesítéseket küld az új jegyekről, helyettesítésekről (még csak a Karinthy Frigyes Gimnáziumhoz van)
- * [eSzivacs 2](https://github.com/boapps/e-Szivacs-2) Android kliens a Kréta rendszerhez
- * [Kréti](https://github.com/szilardhuber/kreta-bot) Bot, ami Krétás értesítéseket küld egy chatbe
- * [kfgApp](https://github.com/baltitenger/KFGapp) Egy app a Karinthy Gimnáziumhoz, Kréta API-t is használ
- * [CardPass](https://github.com/Xerren09/CardPass-Entry) Beléptetőkártyás rendszer, ami a Kréta rendszert használja, hogy eldöntse késett -e a tanuló
- * [eKreta@thegergo02](https://github.com/thegergo02/eKreta-thegergo02) Cinnamon asztali környezethez egy desklet, megjeleníti a jegyeidet és a Kréta API-t használja
- * [gKréta](https://github.com/thegergo02/gKreta) Az [Electron](https://electronjs.org/) frameworkon alapuló kliens a KRÉTA rendszerhez.
- * [eSzivacs-PC](https://github.com/pepyta/eSzivacs-PC) [Electron](https://electronjs.org/)on alapuló PC-s kliens.
- * [e-kreta-cli](https://github.com/szekelymilan/e-kreta-cli) Egy asztali, konzolos (terminál) kliens a Krétához.
-## Iskolák lekérdezése
-#### Az összes iskola ahol be van vezetve az e-Kréta:  
-```bash
+Nem hivatalos Krétás projectek:
+• Spongyarend Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
+• eFilc Webes Kréta kliens diákoknak, Toldys extrákkal ( weboldal )
+• KFGnaplo Android kliens a Krétához, ami értesítéseket küld az új jegyekről, helyettesítésekről (még csak a Karinthy Frigyes Gimnáziumhoz van)
+• eSzivacs 2 Android kliens a Kréta rendszerhez
+• Kréti Bot, ami Krétás értesítéseket küld egy chatbe
+• kfgApp Egy app a Karinthy Gimnáziumhoz, Kréta API-t is használ
+• CardPass Beléptetőkártyás rendszer, ami a Kréta rendszert használja, hogy eldöntse késett -e a tanuló
+• eKreta@thegergo02 Cinnamon asztali környezethez egy desklet, megjeleníti a jegyeidet és a Kréta API-t használja
+• gKréta Az Electron frameworkon alapuló kliens a KRÉTA rendszerhez.
+• eSzivacs-PC Electron on alapuló PC-s kliens.
+• e-kreta-cli Egy asztali, konzolos (terminál) kliens a Krétához.
+• Zsírkréta Még egy Android kliens a Kréta rendszerhez
+
+Iskolák lekérdezése
+
+Az összes iskola ahol be van vezetve az e-Kréta:
+
 curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute
-```
-* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
-    * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
-* https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
 
-#### A szerver válasza:  
-```json
+
+
+• apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
+• 7856d350-1fda-45f5-822d-e1a2f3f1acf0
+
+• https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute : ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
+
+A szerver válasza:
+
 [
   {
     "InstituteId": 3928,
@@ -42,73 +50,84 @@ curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobil
   },
   ...
 ]
-```
 
-## API linkek lekérdezése
-#### Lekéri a KRÉTA API linkjét:
-```bash
+
+
+API linkek lekérdezése
+
+Lekéri a KRÉTA API linkjét:
+
 curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json
-```
-* igazából egy mezei böngészőből is [végrehajtható](http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescriptor.json)
-* mire jó: ha az API linkje változna, akkor nem kell frissíteni az appot (rájött: [thegergo02](https://github.com/thegergo02))
 
-#### A szerver válasza:  
-```json
+
+
+• igazából egy mezei böngészőből is végrehajtható
+• mire jó: ha az API linkje változna, akkor nem kell frissíteni az appot (rájött: thegergo02 )
+
+A szerver válasza:
+
 {
   "GlobalMobileApiUrlDEV": "https://kretaglobalmobileapiuat.ekreta.hu",
   "GlobalMobileApiUrlTEST": "https://kretaglobalmobileapitest.ekreta.hu",
   "GlobalMobileApiUrlUAT": "https://kretaglobalmobileapiuat.ekreta.hu",
   "GlobalMobileApiUrlPROD": "https://kretaglobalmobileapi.ekreta.hu"
 }
-```
 
-## Bejelentkezés
-### Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
 
-```bash
+
+Bejelentkezés
+
+Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
+
 curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
-```
-* a mobil alkalmazás használja
-* csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
-* institute_code: az intézmény azonosítója
-* userName: a felhasználó azonosítója
-* password: a felhasználó jelszava
-* grant_type:  ¯\\_(ツ)_/¯
-* client_id:  ¯\\_(ツ)_/¯
 
-#### A szerver válasza:
-```json
+
+
+• a mobil alkalmazás használja
+• csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
+• institute_code: az intézmény azonosítója
+• userName: a felhasználó azonosítója
+• password: a felhasználó jelszava
+• grant_type: ¯\ (ツ) /¯
+• client_id: ¯\ (ツ) /¯
+
+A szerver válasza:
+
 {
  "access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
  "refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
  ...
  }
-```
 
-## Felhasználó adatainak lekérdezése
-### Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
 
-* a mobil alkalmazás használja
-* kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 
-```bash
+Felhasználó adatainak lekérdezése
+
+Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
+• a mobil alkalmazás használja
+• kell hozzá a Bearer azonosító (lásd: bejelentkezés)
+
+
 curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=xx-xx-xx&toDate=xx-xx-xx
-```
 
-* fromDate: ettől a dátumtól kezdődően mutasson jegyeket, hiányzást és feljegyzést (a "Date" legyen nagyobb vagy egyenlő ennél)
-* toDate: eddig a dátumig bezárólag mutasson jegyeket, hiányzást és feljegyzést (a "Date" legyen kissebb vagy egyenlő ennél)
+
+
+• fromDate: ettől a dátumtól kezdődően mutasson jegyeket, hiányzást és feljegyzést (a "Date" legyen nagyobb vagy egyenlő ennél)
+• toDate: eddig a dátumig bezárólag mutasson jegyeket, hiányzást és feljegyzést (a "Date" legyen kissebb vagy egyenlő ennél)
 
 Ha nem szeretnénk dátumhoz kötni, lehet az xx-xx-xx helyére null-t is írni vagy az egészet le lehet hagyni.
 
-```bash
 curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=null&toDate=null
-```
-```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
-```
 
-#### A szerver válasza:
-```json
+
+
+
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
+
+
+
+A szerver válasza:
+
 {
   "StudentId": 0000000,
   "SchoolYearId": 0000000,
@@ -208,22 +227,24 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     }
   ]
 }
-```
 
-## Órarend lekérése
-### Lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
 
-* a mobil alkalmazás használja
-* kell hozzá a Bearer azonosító (lásd: bejelentkezés)
-* fromDate: a vizsgált időintervallum kezdete (ÉÉÉÉ-HH-NN)
-* toDate: a vizsgált időintervallum vége (ÉÉÉÉ-HH-NN)
 
-```bash
+Órarend lekérése
+
+Lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
+• a mobil alkalmazás használja
+• kell hozzá a Bearer azonosító (lásd: bejelentkezés)
+• fromDate: a vizsgált időintervallum kezdete (ÉÉÉÉ-HH-NN)
+• toDate: a vizsgált időintervallum vége (ÉÉÉÉ-HH-NN)
+
+
 curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09
-```
 
-#### A szerver válasza:
-```json
+
+
+A szerver válasza:
+
 [
   {
     "LessonId": 0000000,
@@ -250,52 +271,56 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   },
   ...
 ]
-```
-## Token frissítés
-### Lekér egy új Bearer kódot amit majd azonosításra fogunk használni később
 
-```bash
+
+
+Token frissítés
+
+Lekér egy új Bearer kódot amit majd azonosításra fogunk használni később
+
 curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
-```
-* a mobil alkalmazás használja
-* refresh_token: A refresh_token amit kaptál amikor beléptél 
-* grant_type: refresh_token
-* client_id:  ¯\\_(ツ)_/¯
 
-#### A szerver válasza:
-```json
+
+
+• a mobil alkalmazás használja
+• refresh_token: A refresh_token amit kaptál amikor beléptél
+• grant_type: refresh_token
+• client_id: ¯\ (ツ) /¯
+
+A szerver válasza:
+
 {
  "access_token":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
  "refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
  ...
  }
- ```
 
-## Tanulói házi feladat lekérése
 
-* Lekéri egy tanuló által felírt házit egy ID alapján
-* Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
-* Ha tanár töltötte fel a házit, amihez az ID tartozik, akkor a válasz üres
 
-```bash
+Tanulói házi feladat lekérése
+• Lekéri egy tanuló által felírt házit egy ID alapján
+• Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
+• Ha tanár töltötte fel a házit, amihez az ID tartozik, akkor a válasz üres
+
+
 curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanuloHaziFeladatLista/HAZIFELADATID
-```
-
-* HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
 
-## Tanári házi feladat lekérése
 
-* Lekéri egy tanár által felírt házit egy ID alapján
-* Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
-* Ha diák töltötte fel, akkor üres
+• HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
-```bash
+Tanári házi feladat lekérése
+• Lekéri egy tanár által felírt házit egy ID alapján
+• Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
+• Ha diák töltötte fel, akkor üres
+
+
 curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanarHaziFeladat/HAZIFELADATID
-```
-
-* HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
 
-## TODO:
-- faliújság
+
+• HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
+
+TODO:
+• faliújság
+
