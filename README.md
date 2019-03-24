@@ -297,6 +297,11 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 * HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
+## Településlista lekérése
+
+* https://bcsszc-zwack.e-kreta.hu/api/GondviseloJelszoIgenyloApi/GetHelysegNevList
+Magyarországi településlistát ad vissza irányítószámokkal együtt, böngészőből is működik
+
 
 ## TODO:
 - faliújság
