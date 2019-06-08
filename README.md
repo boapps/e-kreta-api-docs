@@ -125,23 +125,35 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   "InstituteCode": "xxxxxxxxxxx",
   "Evaluations": [
     {
-      "EvaluationId": 00000000,
+      "EvaluationId": 12345678,
       "Form": "Mark",
       "FormName": "Elégtelen (1) és Jeles (5) között az öt alapértelmezett érték",
       "Type": "MidYear",
-      "TypeName": "Évközi értékelés",
+      "TypeName": "Évközi jegy/értékelés",
       "Subject": "Xxxxxxxx",
       "SubjectCategory": null,
       "SubjectCategoryName": "Xxxxxxxx",
-      "Theme": "Xxxxxxxx",
-      "Mode": "Írásbeli röpdolgozat",
+      "Theme": "xxxxxxx",
+      "IsAtlagbaBeleszamit": true,
+      "Mode": "Gyakorlati feladat",
       "Weight": "100%",
       "Value": "Jeles(5)",
       "NumberValue": 5,
       "SeenByTutelaryUTC": null,
       "Teacher": "Xxxxxxxx Xxxxxxxx",
-      "Date": "0000-00-00T00:00:00",
-      "CreatingTime": "0000-00-00T00:00:00.000"
+      "Date": "2019-06-07T00:00:00",
+      "CreatingTime": "2019-06-07T08:00:00.000",
+      "Jelleg": {
+        "Id": 1,
+        "Nev": "Ertekeles",
+        "Leiras": "Értékelés"
+      },
+      "JellegNev": "Ertekeles",
+      "ErtekFajta": {
+        "Id": 1,
+        "Nev": "Osztalyzat",
+        "Leiras": "Osztályzat"
+      }
     },
     ...
   ],
