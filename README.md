@@ -244,6 +244,9 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   ]
 }
 ```
+#### Jegyek:
+* Type: lehet "HalfYear": félévi; "MidYear": évközi; "EndYear": év végi
+* Form: lehet "Mark": sima jegy; "Text": szöveges értékelés
 
 ## Bejelentett számonkérések lekérdezése
 ### Elvileg lekéri a tanárok által bejelentett dolgozatokat
