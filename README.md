@@ -245,6 +245,17 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }
 ```
 
+## Bejelentett számonkérések lekérdezése
+### Elvileg lekéri a tanárok által bejelentett dolgozatokat
+* a mobil alkalmazás használja
+* kell hozzá a Bearer azonosító (lásd: bejelentkezés)
+
+```bash
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres
+ ```
+
+#### A szerver válasza nekem: semmi, mert nálunk egy tanár sem használja nálunk ezt a funkciót
+ 
 ## Órarend lekérése
 ### Lekéri két adott időpont között megtartott (vagy elmaradt) tanórákat
 
