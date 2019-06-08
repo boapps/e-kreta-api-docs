@@ -44,6 +44,28 @@ curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobil
   ...
 ]
 ```
+#### Egy iskola adatainak lekérése ID alapján:
+```bash
+curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/3928
+```
+* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
+    * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
+* https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
+
+#### A szerver válasza:  
+```json
+{
+  "InstituteId": 3928,
+  "InstituteCode": "appteszt",
+  "Name": "PedApp Teszt Intézmény",
+  "Url": "https://appteszt.ekreta.hu",
+  "City": "Budapest",
+  "AdvertisingUrl": "",
+  "FeatureToggleSet": {
+    "JustificationFeatureEnabled": "false"
+  }
+}
+```
 
 ## API linkek lekérdezése
 #### Lekéri a KRÉTA API linkjét:
