@@ -247,6 +247,7 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #### Jegyek:
 * Type: lehet "HalfYear": félévi; "MidYear": évközi; "EndYear": év végi
 * Form: lehet "Mark": sima jegy; "Text": szöveges értékelés
+* Fejlesztőknek figyelem: az `EvaluationId`-t NEM SZABAD egyedi azonosítóként kezelni, az összetartozó (de nyilván különböző) magatartás és szorgalom jegyek ugyanazt az "id"-t kapják. Tehát két jegy néha ugyanazt az id-t kapja. Megoldás lehet az `EvaluationId` végére illeszteni (concatenatelni stringként) a `Jelleg`-nek az `Id`-jét.
 
 ## Bejelentett számonkérések lekérdezése
 ### Elvileg lekéri a tanárok által bejelentett dolgozatokat
