@@ -92,11 +92,19 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
 ```
 * a mobil alkalmazás használja
+* OAuth 2.0-es "hitelesítési keretrendszer" (felfedezte: [chriskoder](https://github.com/chriskoder))
 * csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
 * institute_code: az intézmény azonosítója
 * userName: a felhasználó azonosítója
 * password: a felhasználó jelszava
-* grant_type:  ¯\\_(ツ)_/¯
+* grant_type: Az OAuth 2 kötelező paramétere, elvileg lehet:
+   * Authorization Code
+   * Implicit
+   * **Password** `grant_type=password`
+   * Client Credentials
+   * Device Code
+   * **Refresh Token** `grant_type=refresh_token`
+   Amikor Password-el lekérjük az access_token-t akkor egy refresh_token-t is kapunk, amivel később a jelszó nélkül is frissíthetjük az access_token-ünket.
 * client_id:  ¯\\_(ツ)_/¯
 
 #### A szerver válasza:
@@ -107,6 +115,13 @@ curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxx
  ...
  }
 ```
+
+### `access_token` frissítése
+```bash
+curl --data "institute_code=xxxxxxxxxxx&refresh_token=xxxxxxxxxxx&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
+```
+* ugyanúgy működik, mint a Bearer kód lekérdezése
+* itt is kapunk egy refresh_token-t amit újra fel tudunk használni a következő frissítéshez
 
 ## Felhasználó adatainak lekérdezése
 ### Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
