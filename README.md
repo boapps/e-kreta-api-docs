@@ -184,6 +184,36 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
 
 ```
 
+## Bejelentett számonkérések elkérése
+
+```bash
+curl https://xxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol=null&DatumIg=null -H "Authorization: Bearer XXXXXXXXXXXXXXX"
+```
+
+A szerver válasza:
+
+```json
+[
+  {
+    "Uid": "0000",
+    "Id": 0000,
+    "Datum": "0000-00-00T00:00:00Z",
+    "HetNapja": "Kedd",
+    "Oraszam": 0,
+    "Tantargy": "kémia",
+    "Tanar": "Xxxxxx Xxxxxx",
+    "SzamonkeresMegnevezese": "xxxxxxxxx",
+    "SzamonkeresModja": "Írásbeli röpdolgozat",
+    "BejelentesDatuma": "0000-00-00T00:00:00Z"
+  }
+  ...
+]
+```
+
+* Uid: az id csak stringként (pl.: 2 -> "2")
+* Hogy miért kell itt (és sehol máshol) a dátumon kívül egy HetNapja is, fogalmam sincs!
+* az óraszámm (szerintem) azt mutatja, hogy hányadik órában lesz a dolgozat
+
 ## Felhasználó adatainak lekérdezése
 ### Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
 
