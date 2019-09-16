@@ -184,7 +184,7 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
 
 ```
 
-## Bejelentett számonkérések elkérése
+## Bejelentett számonkérések lekérése
 
 ```bash
 curl https://xxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol=null&DatumIg=null -H "Authorization: Bearer XXXXXXXXXXXXXXX"
