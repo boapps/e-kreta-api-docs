@@ -123,6 +123,67 @@ curl --data "institute_code=xxxxxxxxxxx&refresh_token=xxxxxxxxxxx&grant_type=ref
 * ugyanúgy működik, mint a Bearer kód lekérdezése
 * itt is kapunk egy refresh_token-t amit újra fel tudunk használni a következő frissítéshez
 
+## E-ügyintézéses üzenetek lekérése
+
+* a mobil alkalmazás használja
+* kell hozzá a Bearer azonosító (lásd: bejelentkezés)
+
+```bash
+curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/sajat -H "Authorization: Bearer XXXXXXXXXXXXXXX"
+```
+
+* Ha nincs még üzeneted, akkor egy 500-as hibakóddal egy `An error has occured!` üzenetet kapsz, ez itt "normális"
+
+#### A szerver válasza:
+```json
+[
+    {
+        "azonosito": 0000,
+        "isElolvasva": true,
+        "isToroltElem": false,
+        "tipus": {
+            "azonosito": 1,
+            "kod": "BEERKEZETT",
+            "rovidNev": "Be\u00e9rkezett \u00fczenet",
+            "nev": "Be\u00e9rkezett \u00fczenet",
+            "leiras": "Be\u00e9rkezett \u00fczenet"
+        },
+        "uzenet": {
+            "azonosito": 00000,
+            "kuldesDatum": "0000-00-00T00:00:00",
+            "feladoNev": "XXXXX XXXXXX",
+            "feladoTitulus": "tan\u00e1r",
+            "szoveg": "xxxxx",
+            "targy": "xxxxxxxxx",
+            "cimzettLista": [
+                {
+                    "azonosito": 0000000,
+                    "kretaAzonosito": 0000000,
+                    "nev": "XXXXXX",
+                    "tipus": {
+                        "azonosito": 4,
+                        "kod": "OSZTALY_TANULO",
+                        "rovidNev": "Oszt\u00e1ly - Tanul\u00f3",
+                        "nev": "Oszt\u00e1ly - Tanul\u00f3",
+                        "leiras": "Oszt\u00e1ly - Tanul\u00f3"
+                    }
+                }
+		...
+            ],
+            "csatolmanyok": [
+                {
+                    "azonosito": 000000,
+                    "fajlNev": "xxxxxxx.xxx"
+                }
+		...
+	    ]
+        }
+    },
+    ...
+]
+
+```
+
 ## Felhasználó adatainak lekérdezése
 ### Jegyek, hiányzások, faliújság, szülő és osztályfőnök adatainak lekérdezése
 
