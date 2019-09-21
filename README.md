@@ -190,7 +190,6 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
 ```
 
 * itt a 0000 a legkülső "azonosito"-t jelöli
-* ez a lekérdezés olvasottá teszi az üzenetet ("isElolvasva": true)
 
 A szerver válasza:
 
@@ -237,6 +236,13 @@ A szerver válasza:
 	    ]
         }
     }
+```
+
+## E-ügyintézéses üzenetek olvasottnak jelölése
+* ettől az "isElolvasva" true lesz
+
+```bash
+curl https://eugyintezes.e-kreta.hu//integration-kretamobile-api/v1/kommunikacio/uzenetek/olvasott -H "Authorization: Bearer XXXXXXXXXXXXXXX" --data "{"isOlvasott":true,"uzenetAzonositoLista":[0000]}"
 ```
 
 ## Bejelentett számonkérések lekérése
