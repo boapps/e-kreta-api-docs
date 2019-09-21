@@ -139,7 +139,7 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
 [
     {
         "azonosito": 0000,
-        "isElolvasva": true,
+        "isElolvasva": false,
         "isToroltElem": false,
         "tipus": {
             "azonosito": 1,
@@ -182,6 +182,61 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
     ...
 ]
 
+```
+* Az "uzenet" nek a "szoveg"-e maximum 100 karakter hosszú lehet, ha a teljes szöveget akarjuk, akkor egy másik lekérdezés kell:
+
+```bash
+curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/0000 -H "Authorization: Bearer XXXXXXXXXXXXXXX"
+```
+
+* itt a 0000 a legkülső "azonosito"-t jelöli
+* ez a lekérdezés olvasottá teszi az üzenetet ("isElolvasva": true)
+
+A szerver válasza:
+
+```json
+    {
+        "azonosito": 0000,
+        "isElolvasva": true,
+        "isToroltElem": false,
+        "tipus": {
+            "azonosito": 1,
+            "kod": "BEERKEZETT",
+            "rovidNev": "Be\u00e9rkezett \u00fczenet",
+            "nev": "Be\u00e9rkezett \u00fczenet",
+            "leiras": "Be\u00e9rkezett \u00fczenet"
+        },
+        "uzenet": {
+            "azonosito": 00000,
+            "kuldesDatum": "0000-00-00T00:00:00",
+            "feladoNev": "XXXXX XXXXXX",
+            "feladoTitulus": "tan\u00e1r",
+            "szoveg": "xxxxx",
+            "targy": "xxxxxxxxx",
+            "cimzettLista": [
+                {
+                    "azonosito": 0000000,
+                    "kretaAzonosito": 0000000,
+                    "nev": "XXXXXX",
+                    "tipus": {
+                        "azonosito": 4,
+                        "kod": "OSZTALY_TANULO",
+                        "rovidNev": "Oszt\u00e1ly - Tanul\u00f3",
+                        "nev": "Oszt\u00e1ly - Tanul\u00f3",
+                        "leiras": "Oszt\u00e1ly - Tanul\u00f3"
+                    }
+                }
+		...
+            ],
+            "csatolmanyok": [
+                {
+                    "azonosito": 000000,
+                    "fajlNev": "xxxxxxx.xxx"
+                }
+		...
+	    ]
+        }
+    }
 ```
 
 ## Bejelentett számonkérések lekérése
