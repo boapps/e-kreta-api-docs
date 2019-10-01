@@ -86,6 +86,8 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 }
 ```
 
+* [Szénási Dániel](https://github.com/danielszenasi) felfedezte, hogy az uat-os api-n [van swagger oldal](https://kretaglobalmobileapiuat.ekreta.hu/swagger/index.html).
+
 ## Bejelentkezés
 ### Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
 
