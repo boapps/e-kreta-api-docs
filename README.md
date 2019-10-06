@@ -504,6 +504,26 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 * HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
 
+## Tanulói házi felírása
+
+* Tanuló fel tud írni házi feladatot, amit aztán a többi diák (és gondolom a tanár is) lát
+* Lehet, hogy néhány iskolában le van tiltva
+
+```bash
+curl -X POST -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"OraId":"00000000","OraDate":"0000. 00. 00. 00:00:00","OraType":"TanitasiOra","HataridoUtc":"0000. 00. 00. 22:00:00","FeladatSzovege":"XXXXXXXX"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/CreateTanuloHaziFeladat"
+```
+
+Válasz:
+```json
+{
+  "TanarHaziFeladatId": 00000,
+  "HozzaadottTanuloHaziFeladatId": 0000,
+  "HozzaadottTanuloHaziBejelentesDatuma": "0000-00-00T00:00:00.00000+00:00"
+}
+```
+
+* Azt nem értem, hogy miért "TanarHaziFeladatId"-nek hívják, amikor a tanuló teszi fel, de itt vannak ilyen furcsaságok
+
 ## Tanári házi feladat lekérése
 
 * Lekéri egy tanár által felírt házit egy ID alapján
