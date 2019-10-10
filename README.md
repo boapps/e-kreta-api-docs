@@ -19,6 +19,12 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
  * [e-kreta-cli](https://github.com/szekelymilan/e-kreta-cli) Egy asztali, konzolos (terminál) kliens a Krétához.
  * [zsírkréta](https://github.com/forcemagic/zsirkreta) Egy Androidos kliens a Krétához
  * [e-Vonalzó](https://github.com/danielszenasi/eVonalzo) Még egy webes Kréta kliens [weboldal](https://evonalzo.netlify.com/sign-in) [graphql api](https://evonalzo.netlify.com/.netlify/functions/kreta)
+
+## A Kréta API-ja nem követi az HTTP standardot:
+Ugyanis az API nem fogadja el ha a header key-t ("apiKey") nagybetűvel küldöd.
+Példa okaként [Go](https://golang.org) net/http csomagja minden header key-t nagybetűvel kezd. Persze ez nem akkora nagy probléma mivel van rá workaround, de figyelni kell erre is.
+[Forrás](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
 ```bash
