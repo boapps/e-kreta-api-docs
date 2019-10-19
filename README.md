@@ -517,6 +517,23 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 * HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
 
+Válasz:
+
+```json
+[
+  {
+    "Uid": "0000",
+    "Id": 0000,
+    "TanuloNev": "Xxxxxx Xxxxxx",
+    "FeladasDatuma": "2019-00-00T00:00:00.000",
+    "FeladatSzovege": "XXXXXXXX",
+    "RogzitoId": 000000,
+    "TanuloAltalTorolt": false,
+    "TanarAltalTorolt": false
+  },
+  ...
+]
+```
 
 ## Tanulói házi felírása
 
@@ -537,6 +554,16 @@ Válasz:
 ```
 
 * Azt nem értem, hogy miért "TanarHaziFeladatId"-nek hívják, amikor a tanuló teszi fel, de itt vannak ilyen furcsaságok
+
+## Házi törlése
+
+* igazából nem törli a házit a rendszerből, csak átírja a "TanuloAltalTorolt" értékét true-ra, ezt a hivatalos kréta azzal jelöli, hogy áthúzza a szöveget
+
+```bash
+curl -X DELETE -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"id":"000"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/000" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+```
+
+* az url végén a 000 helyére is az id kell
 
 ## Tanári házi feladat lekérése
 
