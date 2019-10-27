@@ -30,8 +30,7 @@ Viszont vannak olyan nyelvek (pl.: Swift, Dart), amikben nem lehet case-sensitiv
 [Forrás](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
 
 ## Kötelező header
-Sok lekérdezéshez már kell a következő header: "User-Agent: Kreta.Ellenorzo"
-Ezt a krétások valószínűleg azért csinálták, hogy akadályozzák a nem hivatalos, Kréta api-t használó programok működését, de közben meg elvileg engedik a fejlesztést, én se értem őket..
+Bővebben: https://github.com/boapps/kreta-api-tesztek
 
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
