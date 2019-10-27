@@ -19,6 +19,9 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
  * [e-kreta-cli](https://github.com/szekelymilan/e-kreta-cli) Egy asztali, konzolos (terminál) kliens a Krétához.
  * [zsírkréta](https://github.com/forcemagic/zsirkreta) Egy Androidos kliens a Krétához
  * [e-Vonalzó](https://github.com/danielszenasi/eVonalzo) Még egy webes Kréta kliens [weboldal](https://evonalzo.netlify.com/sign-in) [graphql api](https://evonalzo.netlify.com/.netlify/functions/kreta)
+ * [gokreta](https://github.com/thegergo02/gokreta) Go implementációja a Kréta API-nak.
+ * [kosz](https://github.com/Gbr22/kosz) Nem hivatalos Kréta webapp. https://kreta.gbr22.me/
+ 
 
 ## A Kréta API-ja nem követi az HTTP standardot:
 
