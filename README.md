@@ -26,10 +26,12 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
 
 ## A Kréta API-ja nem követi az HTTP standardot:
 
-Ugyanis az API nem fogadja el ha a header key-t ("apiKey") nagybetűvel küldöd.
+FRISSÍTÉS: a krétások e-mailben írtak, hogy nem lenne szabad az ő api kulcsukat használni, mert szerintük, ez "nem tartozik a tisztességes és jogszerű magatartások körébe"
+
+~~Ugyanis az API nem fogadja el ha a header key-t ("apiKey") nagybetűvel küldöd.
 Példa okaként [Go](https://golang.org) net/http csomagja minden header key-t nagybetűvel kezd. Persze ez nem akkora nagy probléma mivel van rá workaround, de figyelni kell erre is.
 
-Viszont vannak olyan nyelvek (pl.: Swift, Dart), amikben nem lehet case-sensitive headert beállítani és így bizonyos lekérdezések (pl.: iskolák listája) nem lehetséges a Kréta API-ból. Erre készült a [kreta-api-mirror](https://github.com/boapps/kreta-api-mirror), amiből egyszerűen le lehet kérni a [raw jsont](https://raw.githubusercontent.com/boapps/kreta-api-mirror/master/school-list.json). Ezt [palmarci](https://github.com/palmarci) [script-je](https://github.com/palmarci/eszivacsupdate) frissíti.
+~~Viszont vannak olyan nyelvek (pl.: Swift, Dart), amikben nem lehet case-sensitive headert beállítani és így bizonyos lekérdezések (pl.: iskolák listája) nem lehetséges a Kréta API-ból. Erre készült a [kreta-api-mirror](https://github.com/boapps/kreta-api-mirror), amiből egyszerűen le lehet kérni a [raw jsont](https://raw.githubusercontent.com/boapps/kreta-api-mirror/master/school-list.json). Ezt [palmarci](https://github.com/palmarci) [script-je](https://github.com/palmarci/eszivacsupdate) frissíti.
 
 [Forrás](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
 
