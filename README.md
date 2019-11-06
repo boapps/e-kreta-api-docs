@@ -34,41 +34,14 @@ Viszont vannak olyan nyelvek (pl.: Swift, Dart), amikben nem lehet case-sensitiv
 [Forrás](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
 
 ## Kötelező header
-Bővebben: https://github.com/boapps/kreta-api-tesztek
+NE HASZNÁLJÁTOK MÁR!
 
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
-```bash
-curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute
-```
-* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
-    * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
-* https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
+A kréta kérésére eltávolítottam ezt az információt, mert a titkos api kulcsuk benne van.
 
-#### A szerver válasza:  
-```json
-[
-  {
-    "InstituteId": 3928,
-    "InstituteCode": "appteszt",
-    "Name": "PedApp Teszt Intézmény",
-    "Url": "https://appteszt.ekreta.hu",
-    "City": "Budapest",
-    "AdvertisingUrl": "",
-    "FeatureToggleSet": {
-      "JustificationFeatureEnabled": "false"
-    }
-  },
-  ...
-]
-```
 #### Egy iskola adatainak lekérése ID alapján:
-```bash
-curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/3928
-```
-* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
-    * 7856d350-1fda-45f5-822d-e1a2f3f1acf0
-* https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute: ez az URL ahova a lekérdezést küldjük (böngészőből nem működik)
+A kréta kérésére eltávolítottam ezt az információt, mert a titkos api kulcsuk benne van.
 
 #### A szerver válasza:  
 ```json
