@@ -1,10 +1,12 @@
 
 
+
 # e-Kréta API dokumentáció
 
 *Krétás API-knak nem hivatalos gyűjteménye*
 
 Ezen lekérdezések nagy részét egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem.
+
 A webes KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
 
 ## Más, nem hivatalos Krétás projektek:
@@ -33,8 +35,8 @@ A webes KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09
 Ez azért nem célszerű, mert így egyes nyelvekekben (pl.: Swift, Dart), amikben nem lehet kisbetűs Headert beállítani, mert bizonyos lekérdezések (iskolák listája) nem lehetségesek a KRÉTA hivatalos API-jából.
 Többek között emiatt (és a nem kikapcsolható reklámok miatt) azt a megoldást találtuk ki, hogy az iskolák listáját oránként frissítjuk és [saját szerveren](https://e-szivacs.org) hosztoljuk.
 
-**Nem célszerű használat és a *client_id*:**
-Megkeresésünkre a Krétások azt írták e-mailbe, hogy visszafejtésből megszerzett kulcsot nem lenne szabad használni, ami szerintünk azért sem helyes, mert azokhoz a lekérésekhez mindenki ugyanazt a kulcsot használja, továbbá ezt a kulcsot nem csak visszafejtésből lehet megszerezni, hanem konkrétan midnen bejelentkezéskor  a KRÉTA által kiadott token tartalmazza ugyanezt a *client_id*-nek hívott kulcsot.
+**Nem célszerű használat és a *apiKey/client_id*:**
+Megkeresésünkre a Krétások azt írták e-mailbe, hogy visszafejtésből megszerzett kulcsokat nem lenne szabad használni, ami szerintünk azért sem helyes, mert vagy a lekérésekhez mindenki ugyanazt a kulcsot használja, vagy a kulcsot nem csak visszafejtésből lehet megszerezni, hanem konkrétan midnen bejelentkezéskor  a KRÉTA által kiadott token tartalmazza a *client_id*-nek hívott kulcsot.
 
 **Kötelező header**
 
@@ -111,6 +113,19 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
 ```
 
+* institute_code: az intézmény azonosítója
+* userName: a felhasználó azonosítója
+* password: a felhasználó jelszava
+* grant_type: Az OAuth 2 kötelező paramétere, elvileg lehet:
+   * Authorization Code
+   * Implicit
+   * **Password** `grant_type=password`
+   * Client Credentials
+   * Device Code
+   * **Refresh Token** `grant_type=refresh_token`
+   Amikor Password-el lekérjük az access_token-t akkor egy refresh_token-t is kapunk, amivel később a jelszó nélkül is frissíthetjük az access_token-ünket.
+* client_id: ` 919e0c1c-76a2-4646-a2fb-7085bbbf3c56`
+
 ### A Bearer token-ról:
 A Bearer tokent a mobil kliensek használják, elméletileg a diákhoz hasonlóan a tanári résznek is hasonlóan kéne működnie. 
 **ÚJ!** : Igazából a Bearer token egy Base64-es string, amiben csomó más adat is el van rejtve. Ezeket egy művelettel elő lehet varázsolni.
@@ -148,20 +163,6 @@ return Convert.FromBase64String(str);
 Ahol az *"aud"* egyezik a client_id-vel. Érdekes, nem csak visszafejtéssel lehet megkapni, hanem közvetlen a Kréta mondja meg. :O
 
 
- csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
-
-* institute_code: az intézmény azonosítója
-* userName: a felhasználó azonosítója
-* password: a felhasználó jelszava
-* grant_type: Az OAuth 2 kötelező paramétere, elvileg lehet:
-   * Authorization Code
-   * Implicit
-   * **Password** `grant_type=password`
-   * Client Credentials
-   * Device Code
-   * **Refresh Token** `grant_type=refresh_token`
-   Amikor Password-el lekérjük az access_token-t akkor egy refresh_token-t is kapunk, amivel később a jelszó nélkül is frissíthetjük az access_token-ünket.
-* client_id: ` 919e0c1c-76a2-4646-a2fb-7085bbbf3c56`
 #### A szerver válasza:
 ```json
 {
