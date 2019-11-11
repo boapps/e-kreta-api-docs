@@ -111,7 +111,7 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
 ```
 
-### A Bearer token-ról:*
+### A Bearer token-ról:
 A Bearer tokent a mobil kliensek használják, elméletileg a diákhoz hasonlóan a tanári résznek is hasonlóan kéne működnie. 
 **ÚJ!** : Igazából a Bearer token egy Base64-es string, amiben csomó más adat is el van rejtve. Ezeket egy művelettel elő lehet varázsolni.
 ``` c#
