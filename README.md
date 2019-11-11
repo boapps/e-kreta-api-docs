@@ -1,11 +1,13 @@
+
+
 # e-Kréta API dokumentáció
-Krétás API-oknak nem hivatalos gyűjteménye
 
-Ezeket a lekérdezéseket egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem.
+*Krétás API-knak nem hivatalos gyűjteménye*
 
-A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
+Ezen lekérdezések nagy részét egy [SSL Capture](https://play.google.com/store/apps/details?id=com.minhui.networkcapture) nevű Androidos alkalmazással szereztem.
+A webes KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
 
-## Nem hivatalos Krétás projectek:
+## Más, nem hivatalos Krétás projektek:
  * [Spongyarend](http://www.sceurpien.com/spongyarend/) Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
  * [eFilc](https://github.com/bru02/eFilc) Webes Kréta kliens diákoknak, Toldys extrákkal ([weboldal](https://www.bru02.tk/e-filc/))
  * [KFGnaplo](https://github.com/hexadec/KFGnaplo) Android kliens a Krétához, ami értesítéseket küld az új jegyekről, helyettesítésekről (még csak a Karinthy Frigyes Gimnáziumhoz van)
@@ -24,26 +26,51 @@ A böngészős KRÉTA API dokumentációját [itt találod](https://github.com/X
  * [CursedKreta](https://github.com/thegergo02/cursedkreta) Konzolos (terminál) kliens a Krétához, go-ban.
  
 
-## A Kréta API-ja nem követi az HTTP standardot:
+## Figyelem! Ismert problémák az API-val:
 
-FRISSÍTÉS: a krétások e-mailben írtak, hogy nem lenne szabad az ő api kulcsukat használni, mert szerintük, ez "nem tartozik a tisztességes és jogszerű magatartások körébe"
+**A KRÉTA API-ja nem követi az HTTP standardot:**
 
-~~Ugyanis az API nem fogadja el ha a header key-t ("apiKey") nagybetűvel küldöd.
-Példa okaként [Go](https://golang.org) net/http csomagja minden header key-t nagybetűvel kezd. Persze ez nem akkora nagy probléma mivel van rá workaround, de figyelni kell erre is.~~
+Ez azért nem célszerű, mert így egyes nyelvekekben (pl.: Swift, Dart), amikben nem lehet kisbetűs Headert beállítani, mert bizonyos lekérdezések (iskolák listája) nem lehetségesek a KRÉTA hivatalos API-jából.
+Többek között emiatt (és a nem kikapcsolható reklámok miatt) azt a megoldást találtuk ki, hogy az iskolák listáját oránként frissítjuk és [saját szerveren](https://e-szivacs.org) hosztoljuk.
 
-~~Viszont vannak olyan nyelvek (pl.: Swift, Dart), amikben nem lehet case-sensitive headert beállítani és így bizonyos lekérdezések (pl.: iskolák listája) nem lehetséges a Kréta API-ból. Erre készült a [kreta-api-mirror](https://github.com/boapps/kreta-api-mirror), amiből egyszerűen le lehet kérni a [raw jsont](https://raw.githubusercontent.com/boapps/kreta-api-mirror/master/school-list.json). Ezt [palmarci](https://github.com/palmarci) [script-je](https://github.com/palmarci/eszivacsupdate) frissíti.~~
+**Nem célszerű használat és a *client_id*:**
+Megkeresésünkre a Krétások azt írták e-mailbe, hogy visszafejtésből megszerzett kulcsot nem lenne szabad használni, ami szerintünk azért sem helyes, mert azokhoz a lekérésekhez mindenki ugyanazt a kulcsot használja, továbbá ezt a kulcsot nem csak visszafejtésből lehet megszerezni, hanem konkrétan midnen bejelentkezéskor  a KRÉTA által kiadott token tartalmazza ugyanezt a *client_id*-nek hívott kulcsot.
 
-[Forrás](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
+**Kötelező header**
 
-## Kötelező header
-NE HASZNÁLJÁTOK MÁR!
+Jelenlegi tudásunk szerint a KRÉTA blokkolja azokat a lekérdezéseket, amelyek *User-Agent*-je egyezik a "szivacs_naplo" szöveggel, akár nagybetűvel, akár kisbetűvel. Ez a blokkolás viszont (még) nem az összes Krétás szerverre vonatkozik, csak a "2-kaffee" nevű, leggyakrabban a "klik"-el kezdődű intézménykódú iskolák által használt szeverrel. Magyarul kb. 80%-a az iskolálnak Szivacs Naplóval blokkolva van.
+**Mindezek ellenéré tudtunkal még nincsen kötelező header.**
+
 
 ## Iskolák lekérdezése
 #### Az összes iskola ahol be van vezetve az e-Kréta:  
-A kréta kérésére eltávolítottam ezt az információt, mert a titkos api kulcsuk benne van.
+```bash
+curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute
+```
+* apiKey: kötelező bizonyos lekérdezésekhez, mindenkinek ugyanaz:
+    * `7856d350-1fda-45f5-822d-e1a2f3f1acf0` (a Krétások szerint ez a kulcs nem nyilvános, annak ellenéré, hogy mindenki ezt használja)
 
+#### A szerver válasza:  
+```json
+[
+  {
+    "InstituteId": 3928,
+    "InstituteCode": "appteszt",
+    "Name": "PedApp Teszt Intézmény",
+    "Url": "https://appteszt.ekreta.hu",
+    "City": "Budapest",
+    "AdvertisingUrl": "",
+    "FeatureToggleSet": {
+      "JustificationFeatureEnabled": "false"
+    }
+  },
+  ...
+]
+```
 #### Egy iskola adatainak lekérése ID alapján:
-A kréta kérésére eltávolítottam ezt az információt, mert a titkos api kulcsuk benne van.
+```bash
+curl -H "apiKey: 7856d350-1fda-45f5-822d-e1a2f3f1acf0"  https://kretaglobalmobileapi.ekreta.hu/api/v1/Institute/3928
+```
 
 #### A szerver válasza:  
 ```json
@@ -59,7 +86,6 @@ A kréta kérésére eltávolítottam ezt az információt, mert a titkos api ku
   }
 }
 ```
-
 ## API linkek lekérdezése
 #### Lekéri a KRÉTA API linkjét:
 ```bash
@@ -78,17 +104,52 @@ curl http://kretamobile.blob.core.windows.net/configuration/ConfigurationDescrip
 }
 ```
 
-* [Szénási Dániel](https://github.com/danielszenasi) felfedezte, hogy az uat-os api-n [van swagger oldal](https://kretaglobalmobileapiuat.ekreta.hu/swagger/index.html).
-
 ## Bejelentkezés
 ### Lekér egy Bearer kódot amit majd azonosításra fogunk használni később
 
 ```bash
-curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxxx&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
 ```
-* a mobil alkalmazás használja
-* OAuth 2.0-es "hitelesítési keretrendszer" (felfedezte: [chriskoder](https://github.com/chriskoder))
-* csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
+
+### A Bearer token-ról:
+A Bearer tokent a mobil kliensek használják, elméletileg a diákhoz hasonlóan a tanári résznek is hasonlóan kéne működnie. 
+**ÚJ!** : Igazából a Bearer token egy Base64-es string, amiben csomó más adat is el van rejtve. Ezeket egy művelettel elő lehet varázsolni.
+``` c#
+// a telefonos kliens valahogy így csinálja:
+// fontos: a base64-elt json mögött van még hmac
+private static string decodeToken(string str) {
+	switch (str.Length % 4) {
+	    case 2:
+	        str += "==";
+	        break;
+	    case 3:
+	        str += "=";
+	        break;
+}
+return Convert.FromBase64String(str);
+```
+És ezt kapjuk: 
+``` json
+{
+    "alg": "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256",
+    "typ": "JWT"
+} {
+    "idp:user_id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX",
+    "kreta:institute_code": "XXXXXXXX",
+    "kreta:institute_user_id": "00000",
+    "kreta:tutelary_id": "",
+    "kreta:school_year_id": "00",
+    "role": "Student",
+    "exp": 00000,
+    "iss": "kreta.identityprovider",
+    "aud": "919e0c1c-76a2-4646-a2fb-7085bbbf3c56"
+}
+```
+Ahol az *"aud"* egyezik a client_id-vel. Érdekes, nem csak visszafejtéssel lehet megkapni, hanem közvetlen a Kréta mondja meg. :O
+
+
+ csak diák azonosítójával tudtam tesztelgetni, de elvileg a tanárinak is ugyanígy kéne működnie
+
 * institute_code: az intézmény azonosítója
 * userName: a felhasználó azonosítója
 * password: a felhasználó jelszava
@@ -100,8 +161,7 @@ curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxx
    * Device Code
    * **Refresh Token** `grant_type=refresh_token`
    Amikor Password-el lekérjük az access_token-t akkor egy refresh_token-t is kapunk, amivel később a jelszó nélkül is frissíthetjük az access_token-ünket.
-* client_id:  ¯\\_(ツ)_/¯
-
+* client_id: ` 919e0c1c-76a2-4646-a2fb-7085bbbf3c56`
 #### A szerver válasza:
 ```json
 {
@@ -113,7 +173,7 @@ curl --data "institute_code=xxxxxxxxxxx&userName=xxxxxxxxxxx&password=xxxxxxxxxx
 
 ### `access_token` frissítése
 ```bash
-curl --data "institute_code=xxxxxxxxxxx&refresh_token=xxxxxxxxxxx&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl --data "institute_code=xxxxxxxxxxx&refresh_token=xxxxxxxxxxx&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
 ```
 * ugyanúgy működik, mint a Bearer kód lekérdezése
 * itt is kapunk egy refresh_token-t amit újra fel tudunk használni a következő frissítéshez
@@ -124,7 +184,7 @@ curl --data "institute_code=xxxxxxxxxxx&refresh_token=xxxxxxxxxxx&grant_type=ref
 * kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 
 ```bash
-curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/sajat -H "Authorization: Bearer XXXXXXXXXXXXXXX" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/sajat -H "Authorization: Bearer XXXXXXXXXXXXXXX"
 ```
 
 * Ha nincs még üzeneted, akkor egy 500-as hibakóddal egy `An error has occured!` üzenetet kapsz, ez itt "normális"
@@ -181,7 +241,7 @@ curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/
 * Az "uzenet" nek a "szoveg"-e maximum 100 karakter hosszú lehet, ha a teljes szöveget akarjuk, akkor egy másik lekérdezés kell:
 
 ```bash
-curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/0000 -H "Authorization: Bearer XXXXXXXXXXXXXXX" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/0000 -H "Authorization: Bearer XXXXXXXXXXXXXXX"
 ```
 
 * itt a 0000 a legkülső "azonosito"-t jelöli
@@ -237,13 +297,13 @@ A szerver válasza:
 * ettől az "isElolvasva" true lesz
 
 ```bash
-curl https://eugyintezes.e-kreta.hu//integration-kretamobile-api/v1/kommunikacio/uzenetek/olvasott -H "Authorization: Bearer XXXXXXXXXXXXXXX" --data "{"isOlvasott":true,"uzenetAzonositoLista":[0000]}" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl https://eugyintezes.e-kreta.hu//integration-kretamobile-api/v1/kommunikacio/uzenetek/olvasott -H "Authorization: Bearer XXXXXXXXXXXXXXX" --data "{"isOlvasott":true,"uzenetAzonositoLista":[0000]}"
 ```
 
 ## Bejelentett számonkérések lekérése
 
 ```bash
-curl https://xxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol=null&DatumIg=null -H "Authorization: Bearer XXXXXXXXXXXXXXX" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl https://xxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol=null&DatumIg=null -H "Authorization: Bearer XXXXXXXXXXXXXXX"
 ```
 
 A szerver válasza:
@@ -277,7 +337,7 @@ A szerver válasza:
 * kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=xx-xx-xx&toDate=xx-xx-xx -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=xx-xx-xx&toDate=xx-xx-xx
 ```
 
 * fromDate: ettől a dátumtól kezdődően mutasson jegyeket, hiányzást és feljegyzést (a "Date" legyen nagyobb vagy egyenlő ennél)
@@ -286,10 +346,10 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Ha nem szeretnénk dátumhoz kötni, lehet az xx-xx-xx helyére null-t is írni vagy az egészet le lehet hagyni.
 
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=null&toDate=null -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student?fromDate=null&toDate=null
 ```
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Student
 ```
 
 #### A szerver válasza:
@@ -412,12 +472,12 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 * Fejlesztőknek figyelem: az `EvaluationId`-t NEM SZABAD egyedi azonosítóként kezelni, az összetartozó (de nyilván különböző) magatartás és szorgalom jegyek ugyanazt az "id"-t kapják. Tehát két jegy néha ugyanazt az id-t kapja. Megoldás lehet az `EvaluationId` végére illeszteni (concatenatelni stringként) a `Jelleg`-nek az `Id`-jét.
 
 ## Bejelentett számonkérések lekérdezése
-### Elvileg lekéri a tanárok által bejelentett dolgozatokat
+###  Lekéri a tanárok által bejelentett dolgozatokat
 * a mobil alkalmazás használja
 * kell hozzá a Bearer azonosító (lásd: bejelentkezés)
 
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres
  ```
 
 #### A szerver válasza nekem: semmi, mert nálunk egy tanár sem használja nálunk ezt a funkciót
@@ -431,7 +491,7 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 * toDate: a vizsgált időintervallum vége (ÉÉÉÉ-HH-NN)
 
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09 -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/Lesson?fromDate=2018-09-03&toDate=2018-09-09
 ```
 
 #### A szerver válasza:
@@ -467,12 +527,12 @@ curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ### Lekér egy új Bearer kódot amit majd azonosításra fogunk használni később
 
 ```bash
-curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56" https://xxxxxxxxxxx.e-kreta.hu/idp/api/v1/Token
 ```
 * a mobil alkalmazás használja
 * refresh_token: A refresh_token amit kaptál amikor beléptél 
 * grant_type: refresh_token
-* client_id:  ¯\\_(ツ)_/¯
+* client_id:  `919e0c1c-76a2-4646-a2fb-7085bbbf3c56`
 
 #### A szerver válasza:
 ```json
@@ -490,7 +550,7 @@ curl --data "refresh_token=XXXXXXXXXXX&grant_type=refresh_token&client_id=919e0c
 * Ha tanár töltötte fel a házit, amihez az ID tartozik, akkor a válasz üres
 
 ```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanuloHaziFeladatLista/HAZIFELADATID -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanuloHaziFeladatLista/HAZIFELADATID
 ```
 
 * HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
@@ -519,7 +579,7 @@ Válasz:
 * Lehet, hogy néhány iskolában le van tiltva
 
 ```bash
-curl -X POST -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"OraId":"00000000","OraDate":"0000. 00. 00. 00:00:00","OraType":"TanitasiOra","HataridoUtc":"0000. 00. 00. 22:00:00","FeladatSzovege":"XXXXXXXX"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/CreateTanuloHaziFeladat" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -X POST -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"OraId":"00000000","OraDate":"0000. 00. 00. 00:00:00","OraType":"TanitasiOra","HataridoUtc":"0000. 00. 00. 22:00:00","FeladatSzovege":"XXXXXXXX"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/CreateTanuloHaziFeladat"
 ```
 
 Válasz:
@@ -538,23 +598,5 @@ Válasz:
 * igazából nem törli a házit a rendszerből, csak átírja a "TanuloAltalTorolt" értékét true-ra, ezt a hivatalos kréta azzal jelöli, hogy áthúzza a szöveget
 
 ```bash
-curl -X DELETE -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"id":"000"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/000" -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
+curl -X DELETE -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"id":"000"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/000"
 ```
-
-* az url végén a 000 helyére is az id kell
-
-## Tanári házi feladat lekérése
-
-* Lekéri egy tanár által felírt házit egy ID alapján
-* Az ID-t csak abból az órából lehet lekérni, amiben felírtak házit, tehát végig kell vizsgálni az összes órát például 1 héten, hogy lekérjük az aheti házikat
-* Ha diák töltötte fel, akkor üres
-
-```bash
-curl -H "Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  https://xxxxxxxxxxx.e-kreta.hu/mapi/api/v1/HaziFeladat/TanarHaziFeladat/HAZIFELADATID -H "User-Agent: "-H "User-Agent: Kreta.Ellenorzo"
-```
-
-* HAZIFELADATID: egy ID, amit az órarendből kérhetünk le (TeacherHomeworkId)
-
-
-## TODO:
-- faliújság
