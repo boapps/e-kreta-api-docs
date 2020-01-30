@@ -10,6 +10,8 @@ Ezen lekérdezések nagy részét egy [SSL Capture](https://play.google.com/stor
 A webes KRÉTA API dokumentációját [itt találod](https://github.com/Xerren09/eKreta-WebAPI-documentation). ([Xerren09](https://github.com/Xerren09) készítette)
 
 ## Más, nem hivatalos Krétás projektek:
+ * [Arisztokréta](https://play.google.com/store/apps/details?id=hu.coware.ellenorzo) Nem hivatalos kliensapp a kréta rendszert használó diákoknak.
+ * [Napló+](https://play.google.com/store/apps/details?id=hu.coware.naplo) Tanári app a krétához.
  * [Spongyarend](http://www.sceurpien.com/spongyarend/) Ingyenes órarend generátor alkalmazás a KRÉTA rendszer állományaiból
  * [eFilc](https://github.com/bru02/eFilc) Webes Kréta kliens diákoknak, Toldys extrákkal ([weboldal](https://www.bru02.tk/e-filc/))
  * [KFGnaplo](https://github.com/hexadec/KFGnaplo) Android kliens a Krétához, ami értesítéseket küld az új jegyekről, helyettesítésekről (még csak a Karinthy Frigyes Gimnáziumhoz van)
