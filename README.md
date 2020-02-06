@@ -1,6 +1,3 @@
-
-
-
 # e-Kréta API dokumentáció
 
 *Krétás API-knak nem hivatalos gyűjteménye*
@@ -603,3 +600,87 @@ Válasz:
 ```bash
 curl -X DELETE -H "Authorization:Bearer XXXXXXXXXXXXXXXXX" -H "Content-Type:application/json; charset=utf-8" -H "Host:klik00000000.e-kreta.hu" -d '{"id":"000"}' "https://klik0000000.e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/000"
 ```
+## KRÉTA Push notifications - Feliratkozás (POST)
+Feliratkozhatunk egy Google Cloud Messaging alapú push notification szolgáltatásra a KRÉTA back end-jén keresztül.
+
+* Szükséges adatok
+  - apiKey: '7856d350-1fda-45f5-822d-e1a2f3f1acf0' (mindenkinek ugyanaz)
+  - Bearer token / Access token: (Lásd: [Bejelentkezés](https://github.com/boapps/e-kreta-api-docs#bejelentkez%C3%A9s))
+  - InstituteUserId: Az [Access token dekódolása](https://github.com/boapps/e-kreta-api-docs#a-bearer-token-r%C3%B3l) után kapott JSON egyik eleme
+  - InstituteCode: A tanuló iskolájának kódja (Lásd: [Iskolák lekérdezése](https://github.com/boapps/e-kreta-api-docs#iskol%C3%A1k-lek%C3%A9rdez%C3%A9se))
+  - SchoolYearId: A [felhasználó adataiban](https://github.com/boapps/e-kreta-api-docs#felhaszn%C3%A1l%C3%B3-adatainak-lek%C3%A9rdez%C3%A9se) megtalálható
+  - Handle: egy, a telefonhoz tartozó, érvényes [GCM](https://developers.google.com/cloud-messaging) vagy [FCM](https://firebase.google.com/docs/cloud-messaging) token / registration ID (Ezt a google hangsúlyozza, hogy nem elég egyszer lekérni, rendszeresen frissíteni kell, mert változhat)
+
+* Typescript példa
+```typescript
+import { HTTP } from '@ionic-native/http/ngx';
+
+class KretaService {
+  constructor(private http: HTTP){}
+    
+  public async pushSubscribe() {
+    let headers = {
+      'Accept': 'application/json',
+      'apiKey': '7856d350-1fda-45f5-822d-e1a2f3f1acf0',
+      'Authorization': 'bearer ' + <access_token>,
+      'Accept-Encoding': 'gzip'
+    }
+    let params = {
+      'InstituteCode': <InstituteCode>,
+      'InstituteUserId': <InstituteUserId>,
+      'TutelaryId': '',
+      'Platform': 'Gcm',
+      'NotificationType': 'All',
+      'NotificationRole': 'Student',
+      'NotificationSource': 'Kreta',
+      'NotificationEnvironment': 'Ellenorzo_Xamarin',
+      'SchoolYearId': <SchoolYearId>,
+      'Handle': <GMC / FMC Token>,
+    }
+    let httpResponse = await this.http.post('https://kretaglobalmobileapi2.ekreta.hu/api/v2/Registration', params, headers);
+    return httpResponse;
+  }
+}
+```
+* A szerver válasza
+```JSON
+{"registrationId":"0000000000000000000-000000000000000000-0"}
+```
+
+## KRÉTA Push notifications - Leiratkozás (DELETE)
+A Google Cloud Messaging alapú push notification szolgáltatásról való leiratkozás, a KRÉTA back end-jén keresztül.
+
+* Szükséges adatok
+  - apiKey: '7856d350-1fda-45f5-822d-e1a2f3f1acf0' (mindenkinek ugyanaz)
+  - SchoolYearId: A [felhasználó adataiban](https://github.com/boapps/e-kreta-api-docs#felhaszn%C3%A1l%C3%B3-adatainak-lek%C3%A9rdez%C3%A9se) megtalálható
+  - registrationId: A feliratkozás során kapott Id
+* Typescript példa
+```typescript
+import { HTTP } from '@ionic-native/http/ngx';
+
+class KretaService {
+  constructor(private http: HTTP){}
+
+  public async pushUnSubscribe() {
+    let headers = {
+      'Accept': 'application/json',
+      'apiKey': '7856d350-1fda-45f5-822d-e1a2f3f1acf0',
+      'Authorization': 'bearer ' + <access_token>,
+      'Accept-Encoding': 'gzip'
+    }
+    let params = {
+      'registrationId': <registrationId>,
+      'NotificationSource': 'Kreta',
+      'NotificationEnvironment': 'Ellenorzo_Xamarin',
+      'SchoolYearId': <SchoolYearId>,
+    }
+    let httpResponse = await this.http.delete('https://kretaglobalmobileapi2.ekreta.hu/api/v2/Registration', params, headers);
+    return httpResponse;
+  }
+}
+```
+* A szerver válasza
+```JSON
+{}
+```
+
