@@ -1,5 +1,4 @@
-
-
+**Ez már nem aktuális, frissebb változat:** https://github.com/bczsalba/ekreta-docs-v2
 
 # e-Kréta API dokumentáció
 
